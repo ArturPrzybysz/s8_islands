@@ -28,4 +28,5 @@ def test_read_island_file_at_position(island_file_path):
     file_content = read_island_file(island_file_path)
     for y, line in enumerate(file_content):
         for x, expected_value in enumerate(line):
-            assert expected_value == read_island_file_at_position(island_file_path, x, y)
+            value_at_position = read_island_file_at_position(island_file_path, x, y)
+            assert expected_value == value_at_position

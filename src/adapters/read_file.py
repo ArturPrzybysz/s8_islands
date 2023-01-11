@@ -35,13 +35,21 @@ def read_island_file_at_position(path: Path, x: int, y: int) -> bool | None:
     :return: True if land, False if water
     """
     with path.open("r") as f:
-        if y != 0:
-            rows_to_skip = y
-            for _ in range(rows_to_skip):
-                next(f)
+        first_line = f.readline()
+        line_length = len(first_line)
+        offset = line_length * y + x
+        f.seek(offset)
+        return f.read(1) == '1'
 
-        if x != 0:
-            characters_to_skip = x
-            f.read(characters_to_skip)
-        character = f.read(1)
-        return None if character == "" else character == '1'
+
+    # with path.open("r") as f:
+    #     if y != 0:
+    #         rows_to_skip = y
+    #         for _ in range(rows_to_skip):
+    #             next(f)
+    #
+    #     if x != 0:
+    #         characters_to_skip = x
+    #         f.read(characters_to_skip)
+    #     character = f.read(1)
+    #     return None if character == "" else character == '1'
