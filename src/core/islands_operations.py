@@ -23,15 +23,20 @@ class IslandSolver:
         should_be_visited = not visited[x][y] and self.islands[x][y] == LAND
         return should_be_visited
 
-    @functools.lru_cache(maxsize=1000)
+    # @functools.lru_cache(maxsize=1000)
     def _dfs(self, x: int, y: int):
-        self.visited[x][y] = True
+        stack = [(x, y)]
 
-        for dx, dy in self.dfs_directions:
-            new_x = x + dx
-            new_y = y + dy
-            if self._should_visit(new_x, new_y, self.visited):
-                self._dfs(new_x, new_y)
+        while len(stack):
+            x_i, y_i = stack[-1]
+            stack.pop()
+            self.visited[x_i][y_i] = True
+
+            for dx, dy in self.dfs_directions:
+                new_x = x_i + dx
+                new_y = y_i + dy
+                if self._should_visit(new_x, new_y, self.visited):
+                    stack.append((new_x, new_y))
 
     def count_islands(self, ) -> int:
         """
