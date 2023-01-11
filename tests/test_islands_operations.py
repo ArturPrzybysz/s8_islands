@@ -1,7 +1,7 @@
 import pytest
 
 from src.adapters.read_file import read_island_file
-from src.core.islands_operations import count_islands, count_islands_capped_memory
+from src.core.islands_operations import IslandSolver, count_islands_capped_memory
 from tests import ASSETS_PATH
 
 
@@ -15,7 +15,7 @@ from tests import ASSETS_PATH
 ])
 def test_count_islands(file_path, expected_island_count):
     islands = read_island_file(file_path)
-    count: int = count_islands(islands)
+    count: int = IslandSolver(islands).count_islands()
     assert count == expected_island_count
 
 @pytest.mark.parametrize("file_path, expected_island_count", [

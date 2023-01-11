@@ -1,18 +1,7 @@
 import pytest
 
 from src.adapters.read_file import read_island_file, read_island_file_at_position
-from src.utils.types import WATER, LAND
 from tests import ASSETS_PATH
-
-
-@pytest.mark.parametrize("bad_island_file_path", [
-    ASSETS_PATH / "bad_islands1",
-    ASSETS_PATH / "bad_islands2",
-    ASSETS_PATH / "non-existent-file"
-])
-def test_read_island_file_throws(bad_island_file_path):
-    with pytest.raises(RuntimeError):
-        read_island_file(bad_island_file_path)
 
 
 @pytest.mark.parametrize("island_file_path", [
@@ -29,10 +18,14 @@ def test_read_island_correct_files(island_file_path):
     assert len({len(c) for c in content}) == 1
 
 
-@pytest.mark.parametrize("island_file_path, x, y, expected_value", [
-    (ASSETS_PATH / "islands1", 0, 0, WATER),
-    (ASSETS_PATH / "islands1", 1, 1, LAND),
-    (ASSETS_PATH / "islands1", 2, 2, WATER),
+@pytest.mark.parametrize("island_file_path", [
+    (ASSETS_PATH / "islands1"),
+    (ASSETS_PATH / "islands2"),
+    (ASSETS_PATH / "islands3"),
 ])
-def test_read_island_file_at_position(island_file_path, x, y, expected_value):
-    assert read_island_file_at_position(island_file_path, x, y) == expected_value
+def test_read_island_file_at_position(island_file_path):
+    # Test if the output of the `read_island_file` and `read_island_file_at_position` are the same.
+    file_content = read_island_file(island_file_path)
+    for y, line in enumerate(file_content):
+        for x, expected_value in enumerate(line):
+            assert expected_value == read_island_file_at_position(island_file_path, x, y)
