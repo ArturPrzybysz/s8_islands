@@ -21,3 +21,17 @@ def read_island_file(path: Path) -> list[list[bool]]:
     #         island_row =
 
     return island
+
+
+def read_island_file_at_position(path: Path, x: int, y: int) -> bool:
+    """
+    Read a single value from the island file.
+
+    :param path: path to file to read
+    :param x: Which position in row should be the value taken from.
+    :param y: Which row should be the value taken from.
+    :return: True if island, False if water
+    """
+    # TODO: implement
+
+    return False

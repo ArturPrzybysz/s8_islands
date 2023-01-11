@@ -1,14 +1,13 @@
 [tool.poetry]
-name = "silent8"
+name = "silent8_islands"
 version = "0.1.0"
 description = ""
-authors = ["Your Name <you@example.com>"]
+authors = ["ArturPrzybysz"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.10"
-pytest = "^7.2.0"
-
+pytest = "^7.2.0" # TODO: move to dev dependencies
 
 [build-system]
 requires = ["poetry-core"]
